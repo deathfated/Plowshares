@@ -9,12 +9,15 @@ public class GridTile : MonoBehaviour
 
     private GameObject _highlight;
     private SpriteRenderer _renderer;
+    [SerializeField] private ScoreMan _score;
 
 
     private void Awake() 
     {
         _renderer = this.GetComponent<SpriteRenderer>();
-        _highlight = this.transform.GetChild(0).gameObject;    
+        _highlight = this.transform.GetChild(0).gameObject;
+        _score = FindObjectOfType<ScoreMan>();
+
     }
 
     public void Init(bool isOffset)
@@ -44,12 +47,13 @@ public class GridTile : MonoBehaviour
 
         //sr.color =
         
+        
          
     }
 
     private void OnMouseUp() 
     {
-        
+        _score.AddScore(1);
     }
 
 }

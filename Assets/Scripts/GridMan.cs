@@ -34,7 +34,8 @@ public class GridMan : MonoBehaviour
             }
         }
 
-        _camera.transform.position = new Vector3((float)_width/2 - 0.5f, (float)_height/2  -0.5f, -10);
+        _camera.transform.position = new Vector3((float)_width/2 - 0.5f, (float)_height/2  - 0.5f, -10);
+        //_camera.transform.position = new Vector3((float)_width/2 + 1.0f, (float)_height/2  -0f, -10);
     }
 
     public Tile GetTile(Vector2 pos)
