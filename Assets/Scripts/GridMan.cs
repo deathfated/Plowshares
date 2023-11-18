@@ -12,6 +12,34 @@ public class GridMan : MonoBehaviour
     [SerializeField] Transform _camera;
 
     private Dictionary<Vector2, Tile> _tiles;
+    [SerializeField] private ScoreMan _score;
+
+    private bool isGameOver;
+
+
+    #region Singleton
+
+    private static GridMan _instance = null;
+
+    public static GridMan Instance
+    {
+        get
+        {
+            if (_instance == null)
+            {
+                _instance = FindObjectOfType<GridMan>();
+
+                if (_instance == null)
+                {
+                    Debug.LogError("Fatal Error: GridManager not Found");
+                }
+            }
+
+            return _instance;
+        }
+    }
+
+    #endregion
 
 
     private void Start() 
@@ -47,4 +75,10 @@ public class GridMan : MonoBehaviour
         return null;
 
     }
+
+    public void UpdateScore()
+    {
+        _score.AddScore(1);
+    }
+
 }
