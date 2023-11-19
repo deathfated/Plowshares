@@ -12,37 +12,10 @@ public class ScoreMan : MonoBehaviour
 
     [SerializeField] private GameObject _gameOverPanel;
 
-
-    #region Singleton
-
-    private static ScoreMan _instance = null;
-
-    /* public static ScoreMan Instance
-    {
-        get
-        {
-            if (_instance == null)
-            {
-                _instance = FindObjectOfType<ScoreMan>();
-
-                if (_instance == null)
-                {
-                    Debug.LogError("Fatal Error: ScoreManager not Found");
-                }
-            }
-
-            return _instance;
-        }
-    } */
-
-    #endregion
-
-
     private void Start() 
     {
         CurrScore = 0;
         HighScore = PlayerPrefs.GetInt("HighScore");
-        Debug.Log(HighScore);
     }
 
     public void AddScore(int x)

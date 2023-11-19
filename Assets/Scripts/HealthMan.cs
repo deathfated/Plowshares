@@ -21,34 +21,18 @@ public class HealthMan : MonoBehaviour
                     Debug.LogError("Fatal Error: HealthMan not Found");
                 }
             }
-
             return _instance;
         }
     }
 
     #endregion
     
-    /* public int CurrHealth
-    {
-        get { return _currHealth; }
-        set
-        {
-            _currHealth = value;
-            if (_currHealth == 1)
-            {
-                // DO SOMETHING HERE
-                Debug.Log("aaaa");
-            }
-            Debug.Log("popo");
-        }
-    } */
-    
     [SerializeField] private int _currHealth;
     [SerializeField] private GameObject _hpUI;
     [SerializeField] private ScoreMan _score;
 
 
-private int _myProperty;
+    private int _myProperty;
     
 
     private void Start()
@@ -80,7 +64,5 @@ private int _myProperty;
         {
             _hpUI.transform.GetChild(_currHealth).gameObject.SetActive(false);
         }
-
-        //_hpUI.transform.GetChild(2)
     }
 }

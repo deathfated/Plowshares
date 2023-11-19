@@ -13,7 +13,6 @@ public class SceneMan : MonoBehaviour
         if (_hiScoreText != null) 
         {
             _hiScoreText.text = "HI-SCORE : " + PlayerPrefs.GetInt("HighScore").ToString();
-            Debug.Log("HISCORE : "+ PlayerPrefs.GetInt("HighScore").ToString());
         }
     }
 
