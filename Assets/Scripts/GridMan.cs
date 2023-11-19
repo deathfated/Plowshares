@@ -17,7 +17,7 @@ public class GridMan : MonoBehaviour
     [Header("Data")]
     [SerializeField] private GridTile _tilePrefab;
 
-    private List<TileData> _tileData;
+    private List<TileData> _tileData = new List<TileData>();
 
     public List<GridTile> _tilesA, _tilesB, _tilesC;
     public List<GridTile> _threatA, _threatB, _threatC;
@@ -69,7 +69,7 @@ public class GridMan : MonoBehaviour
                 var spawnedTile = Instantiate(_tilePrefab, v, UnityEngine.Quaternion.identity);
                 spawnedTile.name = $"Tile {x} {y}";
 
-                //_tileData.Add(new TileData(spawnedTile, v, 0, 0));
+                _tileData.Add(new TileData(spawnedTile, v, 0, 0));
 
                 var isOffset = ((x + y) % 2 == 1);
                 spawnedTile.Init(isOffset, x ,y);
@@ -91,7 +91,6 @@ public class GridMan : MonoBehaviour
                 }
 
                 _score.AddScore(5);
-                _tilesOccupied[0] = 0; 
                 return;
             case 1:
                 for (int a = 0 ; a < _tilesB.Count; a++)
@@ -101,7 +100,6 @@ public class GridMan : MonoBehaviour
                 }
 
                 _score.AddScore(10);
-                _tilesOccupied[1] = 0;
                 return;
             case 2:
                 for (int a = 0 ; a < _tilesC.Count; a++)
@@ -111,65 +109,57 @@ public class GridMan : MonoBehaviour
                 }
 
                 _score.AddScore(12);
-                _tilesOccupied[2] = 0;
                 return;
         }
+        Debug.Log("aaaa " + type);
+        _tilesOccupied[type] = 0;
+        ResetThreatTiles(type);
+
     }
 
     public void SpawnThreat(int type, Vector3 coord)
     {
-        switch(type)
+        if (type == 1) // ROOK
         {
-            case 0: //Rook
-                /* for (int a = 0; a < _tileData.Count; a++)
+            for (int i = 0; i < _tileData.Count; i++)
+            {
+                //Debug.Log(i);
+                var cor = _tileData[i].GetCoord();
+
+                if (cor.x == coord.x && cor.x <= _width && cor.x > 0)
                 {
-                    var cor = _tileData[a].GetCoord();
+                    GridTile ti = _tileData[i].GetTile();
+                    ti.IsThreatened = true;
 
-                    if (cor.x == coord.x && cor.x <= _width && cor.x > 0)
-                    {
-                        GridTile ti = _tileData[a].GetTile();
-                        ti.IsThreatened = true;
+                }
+                if (cor.y == coord.y && cor.y <= _height && cor.y > 0)
+                {
+                    GridTile ti = _tileData[i].GetTile();
+                    ti.IsThreatened = true;
+                }
 
-                    }
-                    if (cor.y == coord.y&& cor.y <= _height && cor.y > 0)
-                    {
+            } 
+        }
+        else if (type == 2) // KNIGHT
+        {
 
-                    }
+        }
+        else if (type == 3) //BISHOP
+        {
 
-                }  */
-
-                return;
-            case 1: //Knight
-
-                return;
-            case 2: //BiSHOP
-
-                return;
         }
     }
-}
 
-public class TileData
-{
-    private GridTile _tile;
-    private Vector3 _coord;
-    private int _occStatus;
-    private int _threatStatus;
+    private void ResetThreatTiles(int type)
+    {
+        for (int a = 0; a < _tileData.Count; a++)
+            {
+                if (_tileData[a].GetThreatStatus() == type)
+                {
+                    GridTile tile =_tileData[a].GetTile();
+                    tile.IsThreatened = false;
+                }
 
-    public TileData (GridTile tile, Vector3 coord, int occ, int threat)
-    {
-        _tile = tile;
-        _coord = coord;
-        _occStatus = occ;
-        _threatStatus = threat;
-
-    }
-    public GridTile GetTile()
-    {
-        return _tile;
-    }
-    public Vector3 GetCoord()
-    {
-        return _coord;
+            } 
     }
 }

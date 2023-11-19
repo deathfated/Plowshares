@@ -15,8 +15,20 @@ public class GridTile : MonoBehaviour
     [Header("Tile Type")]
     public int OccupiedStatus;
     private Color _occupiedColorTemp;
-    public bool IsThreatened;
-    
+    private bool _isThreatened;
+    public bool IsThreatened
+    {
+        get
+        {
+            return _isThreatened;
+        }
+        set
+        {
+            _isThreatened = value;
+            //Debug.Log(value);
+            _highlight.SetActive(value);
+        }
+    }
 
     private SpriteRenderer _renderer;
     private GameObject _highlight;
@@ -107,6 +119,7 @@ public class GridTile : MonoBehaviour
                     _occupiedColorTemp = _renderer.GetComponent<SpriteRenderer>().color;
                     _occupySprite.GetComponent<SpriteRenderer>().color = _inv.ColorB;
                     _grid._tilesB.Add(this);
+                    _grid.SpawnThreat(type,TileCoordinates);
 
                     _grid._tilesOccupied[1]++;
                     if (_grid._tilesOccupied[1] >= 4)
@@ -118,6 +131,7 @@ public class GridTile : MonoBehaviour
                     _occupiedColorTemp = _renderer.GetComponent<SpriteRenderer>().color;
                     _occupySprite.GetComponent<SpriteRenderer>().color = _inv.ColorC;
                     _grid._tilesC.Add(this);
+                    _grid.SpawnThreat(type,TileCoordinates);
 
                     _grid._tilesOccupied[2]++;
                     if (_grid._tilesOccupied[2] >= 4)
@@ -137,10 +151,4 @@ public class GridTile : MonoBehaviour
         //_occupySprite.GetComponent<SpriteRenderer>().color = _occupiedColorTemp;
         _occupySprite.SetActive(false);
     }
-
-    private void Update()
-    {
-        if(IsThreatened) _highlight.SetActive(true);
-    }
-
 }
