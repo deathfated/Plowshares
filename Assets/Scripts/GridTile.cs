@@ -15,7 +15,8 @@ public class GridTile : MonoBehaviour
     [Header("Tile Type")]
     public int OccupiedStatus;
     private Color _occupiedColorTemp;
-    private bool _isThreatened;
+    public int ThreatStatus;
+    private bool _isThreatened = false;
     public bool IsThreatened
     {
         get
@@ -26,13 +27,14 @@ public class GridTile : MonoBehaviour
         {
             _isThreatened = value;
             //Debug.Log(value);
-            _highlight.SetActive(value);
+            //_threatHighlight.SetActive(value);
         }
     }
 
     private SpriteRenderer _renderer;
     private GameObject _highlight;
     private GameObject _occupySprite;
+    public GameObject ThreatHighlight;
 
     //private ScoreMan _score;
     private TileInventory _inv;
@@ -44,7 +46,8 @@ public class GridTile : MonoBehaviour
     {
         _renderer = this.GetComponent<SpriteRenderer>();
         _highlight = this.transform.GetChild(0).gameObject;
-        _occupySprite = this.transform.GetChild(1).gameObject;
+        _occupySprite = this.transform.GetChild(2).gameObject;
+        ThreatHighlight = this.transform.GetChild(1).gameObject;
 
         //_score = ScoreMan.Instance;
         _inv = TileInventory.Instance;
@@ -70,6 +73,9 @@ public class GridTile : MonoBehaviour
     private void OnMouseEnter() 
     {
         _highlight.SetActive(true);
+
+        int type = _inv.CurrTileType[0];
+        _grid.CheckThreat(type, TileCoordinates);
 
     }
 
@@ -112,7 +118,7 @@ public class GridTile : MonoBehaviour
                     _grid._tilesOccupied[0]++;
                     if (_grid._tilesOccupied[0] >= 4)
                     {
-                        _grid.ResetOccupiedTile(0);
+                        _grid.ResetOccupiedTile(1);
                     }
                     break;
                 case 2:
@@ -124,7 +130,7 @@ public class GridTile : MonoBehaviour
                     _grid._tilesOccupied[1]++;
                     if (_grid._tilesOccupied[1] >= 4)
                     {
-                        _grid.ResetOccupiedTile(1);
+                        _grid.ResetOccupiedTile(2);
                     }
                     break;
                 case 3:
@@ -136,7 +142,7 @@ public class GridTile : MonoBehaviour
                     _grid._tilesOccupied[2]++;
                     if (_grid._tilesOccupied[2] >= 4)
                     {
-                        _grid.ResetOccupiedTile(2);
+                        _grid.ResetOccupiedTile(3);
                     }
                     break;    
             }
@@ -151,4 +157,5 @@ public class GridTile : MonoBehaviour
         //_occupySprite.GetComponent<SpriteRenderer>().color = _occupiedColorTemp;
         _occupySprite.SetActive(false);
     }
+    
 }
