@@ -1109,9 +1109,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _width: 8
   _height: 8
-  _tilePrefab: {fileID: 5402420116351398327, guid: 63744813f23d41d4b892e0a2d0ef6911, type: 3}
   _camera: {fileID: 519420032}
   _score: {fileID: 1612153158}
+  _tilePrefab: {fileID: 5402420116351398327, guid: 63744813f23d41d4b892e0a2d0ef6911, type: 3}
+  _tilesA: []
+  _tilesB: []
+  _tilesC: []
+  _threatA: []
+  _threatB: []
+  _threatC: []
+  _tilesOccupied: 
 --- !u!4 &706247461
 Transform:
   m_ObjectHideFlags: 0
@@ -1625,7 +1632,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c70be13e1613e24e80b77ac257f0092, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CurrTileType: 0
+  CurrTileType: 
+  CurrInventory: 
+  _invPanel: {fileID: 1122248408}
+  ColorA: {r: 0, g: 1, b: 0.9730842, a: 1}
+  ColorB: {r: 0.9995656, g: 0, b: 1, a: 1}
+  ColorC: {r: 1, g: 0.98909175, b: 0, a: 1}
 --- !u!4 &1029610737
 Transform:
   m_ObjectHideFlags: 0

@@ -52,9 +52,6 @@ public class TileInventory : MonoBehaviour
 
     public void NextTile()
     {
-        //CurrTileType = Random.Range(1,4);           //1 2 3
-        //Debug.Log("Current Tile : " + CurrTileType);
-
         CurrTileType.Add(Random.Range(1,4));
         CurrTileType.RemoveAt(0);
 
@@ -73,13 +70,13 @@ public class TileInventory : MonoBehaviour
             {
                 case 1:
                     setColor = ColorA;
-                    return;
+                    break;
                 case 2:
                     setColor = ColorB;
-                    return;
+                    break;
                 case 3:
                     setColor = ColorC;
-                    return;
+                    break;
             } */
 
             int a = 0;
